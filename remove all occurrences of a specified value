@@ -1,0 +1,16 @@
+def remove_element(nums, val):
+    k = 0  
+    for i in range(len(nums)):
+        # If the current element is not equal to val, move it to the beginning of nums
+        if nums[i] != val:
+            nums[k] = nums[i]
+            k += 1
+    
+    return k
+
+# Example usage:
+nums = [3, 2, 2, 3]
+val = 3
+print(remove_element(nums, val))  # Output: 2
+print(nums)  # Output: [2, 2, 2, 3] (the first two elements are not equal to val)
+
