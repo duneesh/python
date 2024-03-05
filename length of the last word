@@ -1,0 +1,14 @@
+def length_of_last_word(s: str) -> int:
+   
+    words = s.split()
+    if not words:
+        return 0
+   
+    return len(words[-1])
+
+# Example usage:
+s = "Hello World"
+print(length_of_last_word(s))  # Output: 5
+
+s = "   fly me   to   the moon  "
+print(length_of_last_word(s))  # Output: 4
