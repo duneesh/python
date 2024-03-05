@@ -1,0 +1,25 @@
+def plus_one(digits):
+    n = len(digits)
+    carry = 1
+    
+    for i in range(n - 1, -1, -1):
+       
+        digits[i] += carry
+        if digits[i] == 10:
+            digits[i] = 0
+            carry = 1
+        else:
+           
+            carry = 0
+            break
+    if carry == 1:
+        digits.insert(0, 1)
+    
+    return digits
+
+# Example usage:
+digits = [1, 2, 3]
+print(plus_one(digits))  # Output: [1, 2, 4]
+
+digits = [4, 3, 2, 1]
+print(plus_one(digits))  # Output: [4, 3, 2, 2]
