@@ -1,0 +1,48 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def rotateRight(head, k):
+    if not head or k == 0:
+        return head
+
+    # Calculate the length of the linked list and find the tail
+    length = 1
+    tail = head
+    while tail.next:
+        tail = tail.next
+        length += 1
+
+    # Calculate the actual rotation amount
+    k %= length
+    if k == 0:
+        return head
+
+    # Move the pointer to the new tail position
+    current = head
+    for _ in range(length - k - 1):
+        current = current.next
+
+    # Rotate the list
+    new_head = current.next
+    current.next = None
+    tail.next = head
+
+    return new_head
+
+# Example usage
+# Construct a linked list: 1 -> 2 -> 3 -> 4 -> 5
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+
+k = 2
+result = rotateRight(head, k)
+
+# Print the resulting linked list
+while result:
+    print(result.val, end=" ")
+    result = result.next
