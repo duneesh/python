@@ -1,0 +1,38 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def addTwoNumbers(l1, l2):
+    dummy_head = ListNode()
+    current = dummy_head
+    carry = 0
+
+    while l1 or l2 or carry:
+        # Calculate sum and carry
+        sum_val = carry
+        if l1:
+            sum_val += l1.val
+            l1 = l1.next
+        if l2:
+            sum_val += l2.val
+            l2 = l2.next
+        carry, digit = divmod(sum_val, 10)
+
+        # Create new node for the sum
+        current.next = ListNode(digit)
+        current = current.next
+
+    return dummy_head.next
+
+# Example usage
+# Construct linked lists representing numbers 342 and 465
+l1 = ListNode(2, ListNode(4, ListNode(3)))
+l2 = ListNode(5, ListNode(6, ListNode(4)))
+
+result = addTwoNumbers(l1, l2)
+
+# Print the result
+while result:
+    print(result.val, end=" ")
+    result = result.next
