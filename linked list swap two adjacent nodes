@@ -1,0 +1,39 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def swapPairs(head):
+    dummy_head = ListNode(0)
+    dummy_head.next = head
+    prev_node = dummy_head
+
+    while head and head.next:
+        # Nodes to be swapped
+        first_node = head
+        second_node = head.next
+
+        # Swap the nodes
+        prev_node.next = second_node
+        first_node.next = second_node.next
+        second_node.next = first_node
+
+        # Move pointers for next iteration
+        prev_node = first_node
+        head = first_node.next
+
+    return dummy_head.next
+
+# Example usage
+# Construct a linked list: 1 -> 2 -> 3 -> 4
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+
+result = swapPairs(head)
+
+# Print the resulting linked list
+while result:
+    print(result.val, end=" ")
+    result = result.next
