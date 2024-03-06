@@ -1,0 +1,52 @@
+def solveSudoku(board):
+    def isValid(row, col, num):
+        for i in range(9):
+            if board[row][i] == num or board[i][col] == num:
+                return False
+            
+        start_row, start_col = 3 * (row // 3), 3 * (col // 3)
+        for i in range(3):
+            for j in range(3):
+                if board[start_row + i][start_col + j] == num:
+                    return False
+        return True
+
+    def backtrack(row, col):
+        if row == 9:
+            return True
+
+        next_row = row + 1 if col == 8 else row
+        next_col = (col + 1) % 9
+
+        if board[row][col] != '.':
+            return backtrack(next_row, next_col)
+
+        for num in range(1, 10):
+            num_char = str(num)
+            if isValid(row, col, num_char):
+                board[row][col] = num_char
+                if backtrack(next_row, next_col):
+                    return True
+                board[row][col] = '.'
+        return False
+
+    backtrack(0, 0)
+
+# Example usage:
+board = [
+    ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+    ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+    [".", "9", "8", ".", ".", ".", ".", "6", "."],
+    ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+    ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+    ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+    [".", "6", ".", ".", ".", ".", "2", "8", "."],
+    [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+    [".", ".", ".", ".", "8", ".", ".", "7", "9"]
+]
+
+solveSudoku(board)
+
+# Print the solved Sudoku board
+for row in board:
+    print(" ".join(row))
