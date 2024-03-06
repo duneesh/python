@@ -1,0 +1,9 @@
+def findComplement(num):
+    binary_str = bin(num)[2:]
+    complement_str = ''.join('1' if bit == '0' else '0' for bit in binary_str)
+    complement_num = int(complement_str, 2)
+    return complement_num
+
+# Example usage
+num = 5
+print(findComplement(num))
