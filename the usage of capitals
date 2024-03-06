@@ -1,0 +1,16 @@
+def isProperCapitalUsage(word):
+    if word.isupper() or word.islower():
+        return True
+    elif word[0].isupper() and word[1:].islower():
+        return True
+    else:
+        return False
+
+# Example usage
+word1 = "USA"
+word2 = "demo"
+word3 = "Google"
+
+print(isProperCapitalUsage(word1))  # Output should be True
+print(isProperCapitalUsage(word2))  # Output should be True
+print(isProperCapitalUsage(word3))  # Output should be True
