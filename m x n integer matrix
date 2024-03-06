@@ -1,0 +1,30 @@
+def setZeroes(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+
+    # Create two lists to store whether each row and column needs to be set to zero
+    zero_rows = [False] * rows
+    zero_cols = [False] * cols
+
+    # Iterate through the matrix to mark the rows and columns that need to be set to zero
+    for i in range(rows):
+        for j in range(cols):
+            if matrix[i][j] == 0:
+                zero_rows[i] = True
+                zero_cols[j] = True
+
+    # Iterate through the matrix again to set the marked rows and columns to zero
+    for i in range(rows):
+        for j in range(cols):
+            if zero_rows[i] or zero_cols[j]:
+                matrix[i][j] = 0
+
+# Example usage
+matrix = [
+    [1, 1, 1],
+    [1, 0, 1],
+    [1, 1, 1]
+]
+setZeroes(matrix)
+for row in matrix:
+    print(row)
