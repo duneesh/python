@@ -1,0 +1,57 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def reverseKGroup(head, k):
+    # Helper function to reverse a segment of the linked list
+    def reverseSegment(prev, current, k):
+        prev_node = prev
+        next_node = None
+        while k > 0:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+            k -= 1
+        return prev, next_node
+
+    dummy = ListNode(0)
+    dummy.next = head
+    prev = dummy
+
+    while True:
+        count = 0
+        temp = prev.next
+        while temp:
+            count += 1
+            temp = temp.next
+        if count < k:
+            break
+        
+        prev, next_group = reverseSegment(prev, prev.next, k)
+        prev.next = next_group
+
+    return dummy.next
+
+# Helper function to print the linked list
+def printLinkedList(head):
+    current = head
+    while current:
+        print(current.val, end=" -> ")
+        current = current.next
+    print("None")
+
+# Example usage:
+# Constructing a linked list: 1 -> 2 -> 3 -> 4 -> 5
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+
+k = 2
+result = reverseKGroup(head, k)
+
+# Print the result
+printLinkedList(result)
