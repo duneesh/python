@@ -1,0 +1,41 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def removeNthFromEnd(head, n):
+    dummy_head = ListNode(0)
+    dummy_head.next = head
+
+    first_pointer = dummy_head
+    second_pointer = dummy_head
+
+    # Move the first pointer ahead by n+1 steps
+    for _ in range(n + 1):
+        first_pointer = first_pointer.next
+
+    # Move both pointers until the first pointer reaches the end
+    while first_pointer is not None:
+        first_pointer = first_pointer.next
+        second_pointer = second_pointer.next
+
+    # Remove the nth node from the end
+    second_pointer.next = second_pointer.next.next
+
+    return dummy_head.next
+
+# Example usage
+# Construct a linked list: 1 -> 2 -> 3 -> 4 -> 5
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+
+n = 2
+result = removeNthFromEnd(head, n)
+
+# Print the resulting linked list
+while result:
+    print(result.val, end=" ")
+    result = result.next
