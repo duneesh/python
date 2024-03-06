@@ -1,0 +1,46 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def reverseBetween(head, left, right):
+    dummy = ListNode(0)
+    dummy.next = head
+    pre = dummy
+
+    # Move pre to the node just before the left position
+    for _ in range(left - 1):
+        pre = pre.next
+
+    # Reverse nodes between left and right positions
+    current = pre.next
+    for _ in range(right - left):
+        temp = pre.next
+        pre.next = current.next
+        current.next = current.next.next
+        pre.next.next = temp
+
+    return dummy.next
+
+# Helper function to print the linked list
+def printLinkedList(head):
+    current = head
+    while current:
+        print(current.val, end=" -> ")
+        current = current.next
+    print("None")
+
+# Example usage:
+# Constructing a linked list: 1 -> 2 -> 3 -> 4 -> 5
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+
+left = 2
+right = 4
+result = reverseBetween(head, left, right)
+
+# Print the result
+printLinkedList(result)
